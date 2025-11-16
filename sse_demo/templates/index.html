@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Deployments</h1>
+<button onclick="createDeployment()">New Deployment</button>
+<ul>
+{% for d in deployments %}
+<li><a href="/deployments/{{ d }}">{{ d }}</a></li>
+{% endfor %}
+</ul>
+<script>
+function createDeployment(){
+    fetch("/deployments",{method:"POST"})
+    .then(r=>r.text())
+    .then(id=>window.location="/deployments/"+id);
+}
+</script>
+</body>
+</html>

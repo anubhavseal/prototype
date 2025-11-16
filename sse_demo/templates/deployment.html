@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<body>
+<a href="/">Home</a>
+<h2>Deployment: {{ deployment_id }}</h2>
+<pre id="logs" style="border:1px solid #ccc;padding:10px;height:400px;overflow-y:scroll;"></pre>
+<script>
+const logBox=document.getElementById("logs");
+const evtSource=new EventSource("/deployments/{{ deployment_id }}/stream");
+evtSource.onmessage=function(e){
+    logBox.textContent = e.data + "\n" + logBox.textContent ;
+    logBox.scrollTop=logBox.scrollHeight;
+};
+</script>
+</body>
+</html>
